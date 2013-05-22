@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+require_relative 'larsip_library'
+require 'optparse'
+require 'rainbow'
+
+input = {}
+errors = {}
+
+option_parser = OptionParser.new do |opts|
+  opts.on("-f FUNCTION") do |function|
+    input[:function] = function
+  end
+
+  opts.on("-o OPS_PER_SEC") do |ops_per_sec|
+    begin
+      input[:ops_per_sec] = eval ops_per_sec
+    rescue
+      errors[:ops_per_sec] = :invalid
+    end
+  end
+end
+
+option_parser.parse!
+
+if input.empty?
+  puts "Usage: larsip \
+-f #{'FUNCTION'.underline} -o #{'OPS_PER_SECOND'.underline}"
+  exit 1
+end
+
+unless input[:function]
+  errors[:function] = :empty
+end
+
+begin
+  eval input[:function].gsub(/n/, '1')
+rescue
+  errors[:function] = :invalid
+end
+
+unless input[:ops_per_sec]
+  errors[:ops_per_sec] = :empty
+end
+
+unless input[:ops_per_sec].to_i > 0
+  errors[:ops_per_sec] = :invalid
+end
+
+unless errors.empty?
+  if errors[:function] == :empty
+    puts "\nMust supply a function.\n".color(:red)
+    puts "Accepted form: -f #{'FUNCTION'.underline}"
+    puts "Example: -f n**2\n\n"
+  end
+  
+  if errors[:ops_per_sec] == :empty
+    puts "\nMust supply the number of operations per second the computer \
+can perform.\n".color(:red)
+    puts "Accepted form: -o #{'OPS_PER_SEC'.underline}"
+    puts "Example: -o 10**6\n\n"
+  end
+
+  if errors[:function] == :invalid
+    puts "\nMust supply a valid function using 'n' as the \
+input variable (without 'f(n) =').\n".color(:red)
+    puts "Example: -f n**2\n\n"
+  end
+
+  if errors[:ops_per_sec] == :invalid
+    puts "\nMust supply a positive integer for ops/second.\n".color(:red)
+    puts "Example: -o 10**6\n\n"
+  end
+
+  exit 1
+end
+
+complexity_by_time(input[:function], input[:ops_per_sec])
