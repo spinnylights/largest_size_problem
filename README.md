@@ -6,15 +6,16 @@ I wrote this program in response to a problem given in an algorithms textbook in
 
 Using it is pretty simple--you pass it a running time as an expression (the right-hand side of the run time function) with `-f` and the OPS of the computer in question with `-o`. Here's an example of it in action:
 
-    $ ./larsip -f 2\*\*n -o 10\*\*6
-    milisecond: **6**
-    second: **19**
-    minute: **25**
-    hour: **28**
-    day: **33**
-    month: **38**
-    year: **46**
-    century: **53**
+```$ ./larsip -f 2\*\*n -o 10\*\*6
+milisecond: **6**
+second: **19**
+minute: **25**
+hour: **28**
+day: **33**
+month: **38**
+year: **46**
+century: **53**
+```
 
 Since OPS [is a crude performance measure](http://en.wikipedia.org/wiki/Instructions_per_second) this is more of a toy than a tool. It does give a nice, concrete sense of how the performance of different run times scales.
 
