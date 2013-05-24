@@ -8,7 +8,7 @@ Using it is pretty simple--you pass it a running time as an expression (the righ
 
 ```
 $ ./larsip -f 2**n -o 10**6
-milisecond: <b>6</b>
+milisecond: 6
 second: 9
 minute: 25
 hour: 28
