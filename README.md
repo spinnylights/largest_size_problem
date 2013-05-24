@@ -6,8 +6,9 @@ I wrote this program in response to a problem given in an algorithms textbook in
 
 Using it is pretty simple--you pass it a running time as an expression (the right-hand side of the run time function) with `-f` and the OPS of the computer in question with `-o`. Here's an example of it in action:
 
-```$ ./larsip -f 2\*\*n -o 10\*\*6
-milisecond: **6**
+```
+$ ./larsip -f 2**n -o 10**6
+milisecond: __6__
 second: **19**
 minute: **25**
 hour: **28**
